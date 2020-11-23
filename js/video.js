@@ -7,6 +7,7 @@ window.addEventListener("load", function () {
 document.querySelector("#play").addEventListener("click", function () {
 	console.log("Play Video");
 	volume.innerHTML = "100%";
+	document.getElementById("volume").textContent = "100%";
 	video.play();
 });
 
@@ -39,31 +40,44 @@ document.querySelector("#mute").addEventListener("click", function () {
 		video.muted = false;
 		this.innerHTML = "Mute";
 		console.log('video.muted');
-	}
-	else {
+	} else {
 		video.muted = true;
 		this.innerHTML = "Unmute";
 		console.log('video.muted');
 	}
 })
 
-document.querySelector("#volume").addEventListener("click", function (e) {
-	console.log("volume");
-	var slider = document.getElementById("volumeSlider");
-	var output = document.getElementById("volume");
-	output.innerHTML = slider.value;
+document.querySelector("#volumeSlider").addEventListener("change", function(){
+	var slideValue = document.getElementById("volumeSlider").value;
+	var span = document.getElementById("volume");
+	var vid = document.getElementById("myVideo");
 
-	slider.oninput = function(){
-		output.innerHTML = this.value;
-	}
+	// console.log(slideValue)
+	span.textContent = slideValue + "%";
+	vid.volume = slideValue/100;
 })
 
-document.querySelector("#oldschool").addEventListener("click", function () {
-	console.log("Oldschool");
-	video.classList.add("OldTime");
+// document.querySelector("#volume").addEventListener("click", function (e) {
+// 	console.log("volume");
+	
+// 	var slider = document.getElementById("volumeSlider");
+// 	var output = document.getElementById("volume");
+	
+// 	output.innerHTML = slider.value;
+
+// 	slider.oninput = function () {
+// 		output.innerHTML = this.value;
+// 		video.volume = this.value / 100;
+// 	}
+
+// })
+
+document.querySelector("#old").addEventListener("click", function () {
+	console.log("oldschool");
+	video.classList.add("oldTime");
 })
 
-document.querySelector("#Original").addEventListener("click", function () {
-	console.log("Original");
-	video.classList.remove("Original");
+document.querySelector("#original").addEventListener("click", function () {
+	console.log("original");
+	video.classList.remove("oldTime");
 })
